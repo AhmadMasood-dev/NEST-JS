@@ -4,6 +4,7 @@ import { BookMiddleware } from './book.middleware';
 
 @Module({
   controllers: [BookController],
+  imports: [],
 })
 export class BookModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
