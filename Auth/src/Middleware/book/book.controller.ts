@@ -6,13 +6,18 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  Req,
+  Res,
   UseFilters,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import type { BookDto } from './dto/book.dto';
 import { BookPipe } from './pipes/book.pipe';
 import { BookExceptionFilter } from './book.exception.filter';
 import { BookGuard } from './book.guard';
+import { BookInterceptor } from './book.interceptor';
+import type { Request, Response } from 'express';
 
 @Controller('/api/v1/book')
 export class BookController {
@@ -33,5 +38,11 @@ export class BookController {
   addBook(@Body(new BookPipe()) book: BookDto) {
     console.log('Book data:', book);
     return 'Book added successfully';
+  }
+  @Post('/addonebook')
+  @UseInterceptors(BookInterceptor)
+  addOneBook(@Req() req: Request, @Res() res: Response): any {
+    console.log('Book data:');
+    return res.json(req.body);
   }
 }
