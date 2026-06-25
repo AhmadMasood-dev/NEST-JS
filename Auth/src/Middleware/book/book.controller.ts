@@ -19,7 +19,7 @@ import { BookGuard } from './book.guard';
 import { BookInterceptor } from './book.interceptor';
 import type { Request, Response } from 'express';
 
-@Controller('/api/v1/book')
+@Controller('book')
 export class BookController {
   @Get()
   @UseFilters(new BookExceptionFilter())
